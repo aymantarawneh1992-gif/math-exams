@@ -64,7 +64,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding:10px 16px 30px}
  <ol>
   <li>اختر صفك من البطاقات بالأعلى، ثم اكتب اسمك وشعبتك.</li>
   <li>اختر حرف الإجابة (A – B – C – D) تحت كل سؤال، وتنقّل بين الأسئلة بحرية.</li>
-  <li>بعد التسليم تظهر درجتك والعلامة المفصّلة لكل ناتج تعلّم، ثم راجع أخطاءك مع الحل النموذجي، وتستطيع نسخ نتيجتك وإرسالها لمعلمك.</li>
+  <li>تستطيع إعادة الاختبار أكثر من مرة: النموذج A ثم B ثم C ثم نماذج مختلطة. بعد التسليم تظهر درجتك والعلامة المفصّلة لكل ناتج تعلّم، ثم راجع أخطاءك مع الحل النموذجي، وتستطيع نسخ نتيجتك وإرسالها لمعلمك.</li>
  </ol>
 </div></section>
 <footer>إعداد: الأستاذ أيمن الطراونة — قسم الرياضيات، مدرسة شخبوط بن سلطان للتعليم الثانوي</footer>
@@ -80,7 +80,7 @@ const EX=[
  {href:'g11a.html',num:'11',ar:'الحادي عشر متقدم',en:'Grade 11 Advanced',q:36,lang:'English',ready:true}
 ];
 const g=document.getElementById('grid');
-g.innerHTML=EX.map(e=>'<a class="g'+(e.ready?'':' soon')+'" href="'+e.href+'"><div class="top"><span class="num">'+e.num+'</span><span class="tag">'+(e.ready?'جاهز':'قريباً')+'</span></div><h2>'+e.ar+'</h2><div class="en">'+e.en+'</div><div class="meta"><span>'+e.q+' سؤالاً</span><span>60 دقيقة</span><span>'+e.lang+'</span></div><div class="go">ابدأ الاختبار ← Start</div></a>').join('');
+g.innerHTML=EX.map(e=>'<a class="g'+(e.ready?'':' soon')+'" href="'+e.href+'"><div class="top"><span class="num">'+e.num+'</span><span class="tag">'+(e.ready?'جاهز':'قريباً')+'</span></div><h2>'+e.ar+'</h2><div class="en">'+e.en+'</div><div class="meta"><span>'+e.q+' سؤالاً</span><span>60 دقيقة</span><span>3 نماذج + إعادة غير محدودة</span><span>'+e.lang+'</span></div><div class="go">ابدأ الاختبار ← Start</div></a>').join('');
 }
 </script>
 </body>
