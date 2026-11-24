@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Types of Studies – Interactive Practice | Grade 11 Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1b2a4a;--teal:#0f9d8a;--amber:#f5a524;--red:#e5484d;--green:#1f9d55;--bg:#f3f6fb;--card:#fff;--muted:#5b6475}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,Arial,sans-serif;background:var(--bg);color:#1d2433}
+.ar{font-family:'Noto Kufi Arabic',Tahoma,sans-serif;direction:rtl;text-align:right}
+header{background:linear-gradient(135deg,#1b2a4a 0%,#27457a 55%,#0f9d8a 100%);color:#fff;padding:26px 18px 70px;text-align:center;position:relative;overflow:hidden}
+header:before,header:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+header:before{width:220px;height:220px;top:-80px;left:-60px}
+header:after{width:160px;height:160px;bottom:-60px;right:-30px}
+header .school{font-size:13px;letter-spacing:1px;opacity:.85;text-transform:uppercase}
+header h1{margin:8px 0 4px;font-size:26px}
+header .ar{text-align:center;font-size:16px;opacity:.95}
+header .teacher{margin-top:8px;font-size:13px;opacity:.85}
+.wrap{max-width:860px;margin:-48px auto 40px;padding:0 14px;position:relative;z-index:2}
+.panel{background:var(--card);border-radius:18px;box-shadow:0 8px 28px rgba(27,42,74,.10);padding:18px 20px;margin-bottom:16px}
+.top{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.top input{flex:1;min-width:200px;padding:11px 14px;border:2px solid #dbe2ee;border-radius:12px;font:inherit}
+.stats{display:flex;gap:10px}
+.stat{background:#eef3fb;border-radius:12px;padding:8px 14px;text-align:center;min-width:78px}
+.stat b{display:block;font-size:20px;color:var(--navy)}
+.stat span{font-size:11px;color:var(--muted)}
+.stat.ok b{color:var(--green)}.stat.no b{color:var(--red)}
+.bar{height:10px;background:#e4eaf4;border-radius:10px;overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .4s}
+.ref{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ref div{border-radius:14px;padding:12px;color:#fff}
+.ref h3{margin:0 0 4px;font-size:15px}.ref p{margin:0;font-size:12.5px;line-height:1.5}
+.ref .ar{font-size:12px;margin-top:6px;opacity:.95}
+.r1{background:#3b6fd8}.r2{background:#0f9d8a}.r3{background:#e0761b}
+.level{display:inline-block;margin:22px 0 10px;padding:7px 16px;border-radius:30px;color:#fff;font-weight:700;font-size:14px}
+.l1{background:#3b6fd8}.l2{background:#0f9d8a}.l3{background:#c2410c}
+.q{background:var(--card);border-radius:16px;padding:16px 18px;margin-bottom:14px;box-shadow:0 4px 16px rgba(27,42,74,.07);border-left:6px solid #c9d4e6;transition:border-color .3s}
+.q.right{border-left-color:var(--green)}.q.wrong{border-left-color:var(--red)}
+.qh{display:flex;gap:12px}
+.num{flex:0 0 34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.qt{font-weight:600;line-height:1.5}
+.qa{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.8;padding-top:6px;border-top:1px dashed #dbe2ee}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.opt{border:2px solid #dbe2ee;background:#fafcff;border-radius:12px;padding:10px 12px;cursor:pointer;text-align:left;font:inherit;transition:.15s;display:flex;gap:9px;align-items:flex-start}
+.opt:hover:not([disabled]){border-color:var(--teal);background:#effaf8}
+.opt .l{flex:0 0 24px;height:24px;border-radius:7px;background:#e4eaf4;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.opt small{display:block;font-family:'Noto Kufi Arabic',Tahoma,sans-serif;direction:rtl;text-align:right;color:var(--muted);font-size:12px;margin-top:3px}
+.opt[disabled]{cursor:default;color:inherit;opacity:1}
+.opt.correct{border-color:var(--green);background:#e9f8ef}.opt.correct .l{background:var(--green);color:#fff}
+.opt.picked-wrong{border-color:var(--red);background:#fdeeee}.opt.picked-wrong .l{background:var(--red);color:#fff}
+.fb{display:none;margin-top:12px;border-radius:12px;padding:12px 14px;line-height:1.7}
+.fb.show{display:block;animation:pop .35s}
+.fb.good{background:#e9f8ef;border:1px solid #b6e6c8}.fb.bad{background:#fdeeee;border:1px solid #f4c2c3}
+.fb .head{font-weight:700;margin-bottom:4px}
+.fb .en{font-size:14px}.fb .ar{font-size:14px;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.12)}
+@keyframes pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.result{display:none;text-align:center}
+.result.show{display:block}
+.result h2{margin:6px 0;color:var(--navy)}
+.big{font-size:44px;font-weight:700;background:linear-gradient(90deg,var(--teal),var(--amber));-webkit-background-clip:text;color:transparent}
+button.main{background:var(--navy);color:#fff;border:0;border-radius:12px;padding:12px 22px;font:inherit;font-weight:600;cursor:pointer;margin:6px}
+button.main.alt{background:var(--teal)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px}
+@media(max-width:640px){.opts,.ref{grid-template-columns:1fr}header h1{font-size:21px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="school">Ministry of Education · Shakhbout Bin Sultan School · Mathematics</div>
+  <h1>Types of Studies – Interactive Practice</h1>
+  <div class="ar">أنواع الدراسات: المسح، التجربة، الدراسة القائمة على الملاحظة</div>
+  <div class="teacher">Grade 11 Advanced · Mr. Ayman AL-Tarawneh</div>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="top">
+      <input id="name" placeholder="Student name / اسم الطالب">
+      <div class="stats">
+        <div class="stat ok"><b id="sOk">0</b><span>Correct ✓</span></div>
+        <div class="stat no"><b id="sNo">0</b><span>Wrong ✗</span></div>
+        <div class="stat"><b id="sLeft">0</b><span>Left</span></div>
+      </div>
+    </div>
+    <div class="bar"><i id="prog"></i></div>
+  </div>
+
+  <div class="panel">
+    <div class="ref">
+      <div class="r1"><h3>Survey</h3><p>People in a sample <b>answer questions</b> (questionnaire / interview).</p><div class="ar">المسح: أفراد العيّنة يجيبون عن أسئلة.</div></div>
+      <div class="r2"><h3>Observational study</h3><p>Researchers <b>only watch and record</b>; they do not influence anything.</p><div class="ar">الملاحظة: الباحث يراقب ويسجّل فقط دون تدخّل.</div></div>
+      <div class="r3"><h3>Experiment</h3><p>A <b>treatment</b> is applied to one group and compared with a <b>control group</b>.</p><div class="ar">التجربة: معالجة لمجموعة ومقارنتها بمجموعة ضابطة.</div></div>
+    </div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="panel result" id="result">
+    <h2>Well done! · أحسنت</h2>
+    <div class="big" id="score"></div>
+    <p id="msg"></p>
+    <p class="ar" id="msgAr" style="text-align:center"></p>
+    <button class="main alt" onclick="retryWrong()">Retry wrong answers · أعد الأسئلة الخاطئة</button>
+    <button class="main" onclick="restart()">Start again · ابدأ من جديد</button>
+  </div>
+</div>
+<footer>Shakhbout Bin Sultan School – Mathematics Department · Mr. Ayman AL-Tarawneh</footer>
+
+<script>
+const ST={S:'Survey',O:'Observational study',E:'Experiment'};
+const Q=[
+// ---------- SUPPORT ----------
+{lv:1,en:'A school gives a questionnaire about favourite subjects to 80 randomly chosen students. This study is:',ar:'توزّع مدرسة استبانة عن المواد المفضّلة على 80 طالباً اختيروا عشوائياً. هذه الدراسة هي:',
+ o:[['a survey','مسح'],['an experiment','تجربة'],['an observational study','دراسة قائمة على الملاحظة'],['a control group','مجموعة ضابطة']],c:0,
+ en_x:'The students are <b>asked questions</b> through a questionnaire, so the data comes from their answers → <b>survey</b>. No treatment is given (not an experiment) and nobody is just being watched (not observational).',
+ ar_x:'الطلاب <b>يجيبون عن أسئلة</b> في استبانة، أي أن البيانات تأتي من إجاباتهم ← <b>مسح</b>. لا توجد معالجة تُطبَّق عليهم فهي ليست تجربة، ولا يقتصر الباحث على المراقبة فهي ليست دراسة ملاحظة.'},
+{lv:1,en:'In which type of study do researchers apply a treatment and measure its effect?',ar:'في أي نوع من الدراسات يطبّق الباحثون معالجةً ويقيسون أثرها؟',
+ o:[['survey','المسح'],['observational study','الدراسة القائمة على الملاحظة'],['experiment','التجربة'],['none of these','لا شيء مما سبق']],c:2,
+ en_x:'Applying a <b>treatment</b> (doing something to the participants) and measuring the result is the definition of an <b>experiment</b>.',
+ ar_x:'تطبيق <b>معالجة</b> على المشاركين (أي التدخّل وفعل شيء لهم) ثم قياس النتيجة هو تعريف <b>التجربة</b>.'},
+{lv:1,en:'Researchers stand in Al Jimi Mall and record how many shoppers use the stairs instead of the escalator. This is:',ar:'يقف باحثون في مول الجيمي ويسجّلون عدد المتسوقين الذين يستخدمون الدرج بدلاً من السلّم الكهربائي. هذه:',
+ o:[['a survey','مسح'],['an experiment','تجربة'],['an observational study','دراسة قائمة على الملاحظة'],['a treatment group','مجموعة معالجة']],c:2,
+ en_x:'The researchers <b>only watch and record</b>. They do not ask the shoppers anything and do not change anything → <b>observational study</b>.',
+ ar_x:'الباحثون <b>يراقبون ويسجّلون فقط</b>، فلا يسألون المتسوقين ولا يغيّرون شيئاً ← <b>دراسة قائمة على الملاحظة</b>.'},
+{lv:1,en:'In an experiment, the group that does NOT receive the treatment is called the:',ar:'في التجربة، تُسمّى المجموعة التي لا تتلقّى المعالجة:',
+ o:[['sample','العيّنة'],['control group','المجموعة الضابطة'],['treatment group','المجموعة التجريبية'],['population','المجتمع']],c:1,
+ en_x:'The <b>control group</b> gets no treatment (or a fake one). It is used for comparison, to see whether the treatment really made a difference.',
+ ar_x:'<b>المجموعة الضابطة</b> لا تتلقّى المعالجة (أو تتلقّى معالجة وهمية)، وتُستخدم للمقارنة لمعرفة هل أحدثت المعالجة فرقاً فعلاً.'},
+{lv:1,en:'In an experiment, the group that DOES receive the treatment is called the:',ar:'في التجربة، تُسمّى المجموعة التي تتلقّى المعالجة:',
+ o:[['control group','المجموعة الضابطة'],['treatment group','المجموعة التجريبية (مجموعة المعالجة)'],['population','المجتمع'],['survey group','مجموعة المسح']],c:1,
+ en_x:'The <b>treatment (experimental) group</b> receives the treatment; its results are compared with the control group.',
+ ar_x:'<b>المجموعة التجريبية</b> هي التي تتلقّى المعالجة، وتُقارَن نتائجها بنتائج المجموعة الضابطة.'},
+{lv:1,en:'True or False: In an observational study, the researchers try to change the behaviour of the participants.',ar:'صح أم خطأ: في الدراسة القائمة على الملاحظة يحاول الباحثون تغيير سلوك المشاركين.',
+ o:[['True','صح'],['False','خطأ']],c:1,
+ en_x:'<b>False.</b> In an observational study the researchers do <b>not</b> influence the participants; they only observe and record. If they changed something, it would be an experiment.',
+ ar_x:'<b>خطأ.</b> في الدراسة القائمة على الملاحظة <b>لا</b> يتدخّل الباحثون في سلوك المشاركين، بل يراقبون ويسجّلون فقط. لو غيّروا شيئاً لأصبحت تجربة.'},
+{lv:1,en:'True or False: A survey collects data by asking people questions.',ar:'صح أم خطأ: يجمع المسح البيانات عن طريق طرح الأسئلة على الأشخاص.',
+ o:[['True','صح'],['False','خطأ']],c:0,
+ en_x:'<b>True.</b> A survey gathers data from the answers people give to questions (a questionnaire, an interview or an online form).',
+ ar_x:'<b>صح.</b> المسح يجمع البيانات من إجابات الأشخاص عن الأسئلة (استبانة أو مقابلة أو نموذج إلكتروني).'},
+{lv:1,en:'Purpose: "To find out whether a new revision app improves students’ math scores." The best study type is:',ar:'الهدف: «معرفة ما إذا كان تطبيق مراجعة جديد يحسّن درجات الطلاب في الرياضيات». أنسب نوع دراسة هو:',
+ o:[['survey','مسح'],['experiment','تجربة'],['observational study','دراسة قائمة على الملاحظة'],['none of these','لا شيء مما سبق']],c:1,
+ en_x:'"Does X <b>improve</b> Y?" is a <b>cause-and-effect</b> question. To answer it we give the app to one group (treatment), not to another (control), and compare scores → <b>experiment</b>.',
+ ar_x:'سؤال «هل يحسّن X الناتج Y؟» هو سؤال عن <b>السبب والنتيجة</b>. للإجابة عنه نعطي التطبيق لمجموعة (تجريبية) ولا نعطيه لأخرى (ضابطة) ثم نقارن الدرجات ← <b>تجربة</b>.'},
+// ---------- CORE ----------
+{lv:2,en:'A clinic in Al Ain randomly selects 200 adults. Half take a new vitamin daily and half take a pill with no vitamin. After 3 months their energy levels are compared. Classify the study.',ar:'تختار عيادة في العين 200 شخص بالغ عشوائياً؛ نصفهم يتناول فيتاميناً جديداً يومياً والنصف الآخر حبّة بلا فيتامين، وبعد 3 أشهر تُقارَن مستويات طاقتهم. صنّف الدراسة.',
+ o:[['Survey','مسح'],['Observational study','دراسة قائمة على الملاحظة'],['Experiment','تجربة'],['It cannot be classified','لا يمكن تصنيفها']],c:2,
+ en_x:'The researchers <b>assign a treatment</b> (the vitamin) to one group and compare it with a group that gets a pill with no vitamin (control) → <b>experiment</b>.',
+ ar_x:'الباحثون <b>يطبّقون معالجة</b> (الفيتامين) على مجموعة ويقارنونها بمجموعة تأخذ حبّة بلا فيتامين (مجموعة ضابطة) ← <b>تجربة</b>.'},
+{lv:2,en:'In the vitamin study (previous question), which group is the control group?',ar:'في دراسة الفيتامين (السؤال السابق)، ما المجموعة الضابطة؟',
+ o:[['The adults who take the new vitamin','البالغون الذين يتناولون الفيتامين الجديد'],['The adults who take the pill with no vitamin','البالغون الذين يتناولون الحبّة التي لا تحتوي على فيتامين'],['All 200 adults','جميع البالغين الـ 200'],['The clinic doctors','أطباء العيادة']],c:1,
+ en_x:'The <b>control group</b> does not get the real treatment. The adults taking the pill with no vitamin (a placebo) are the control group; the vitamin takers are the treatment group.',
+ ar_x:'<b>المجموعة الضابطة</b> لا تتلقّى المعالجة الحقيقية، فهي البالغون الذين يتناولون الحبّة الخالية من الفيتامين (دواء وهمي)، أما من يتناولون الفيتامين فهم المجموعة التجريبية.'},
+{lv:2,en:'For one week, a researcher records the number of cars that come to a full stop at the stop sign near the school. Classify the study.',ar:'لمدة أسبوع، يسجّل باحث عدد السيارات التي تتوقف توقفاً كاملاً عند إشارة «قف» القريبة من المدرسة. صنّف الدراسة.',
+ o:[['Survey, because the drivers are asked','مسح، لأن السائقين يُسألون'],['Experiment, because the sign is the treatment','تجربة، لأن الإشارة هي المعالجة'],['Observational study, because he only watches and records','دراسة ملاحظة، لأنه يراقب ويسجّل فقط'],['Experiment, because it lasts one week','تجربة، لأنها تستمر أسبوعاً']],c:2,
+ en_x:'The researcher does not talk to the drivers and does not put up a new sign; he just <b>watches and counts</b> → <b>observational study</b>. The stop sign was already there, so it is not a treatment.',
+ ar_x:'الباحث لا يكلّم السائقين ولا يضع إشارة جديدة، بل <b>يراقب ويعدّ</b> فقط ← <b>دراسة قائمة على الملاحظة</b>. الإشارة موجودة أصلاً فهي ليست معالجة.'},
+{lv:2,en:'The Student Council gives a questionnaire to 60 randomly selected students out of the school’s 900 students. What is the population?',ar:'يوزّع مجلس الطلبة استبانة على 60 طالباً اختيروا عشوائياً من أصل 900 طالب في المدرسة. ما المجتمع؟',
+ o:[['The 60 selected students','الطلاب الـ 60 المختارون'],['All 900 students of the school','جميع طلاب المدرسة الـ 900'],['The Student Council','مجلس الطلبة'],['The school trips','الرحلات المدرسية']],c:1,
+ en_x:'The <b>population</b> is the whole group we want to learn about: <b>all 900 students</b>. The 60 students who answer are the <b>sample</b>, and the study itself is a survey.',
+ ar_x:'<b>المجتمع</b> هو المجموعة الكاملة التي نريد معرفة رأيها: <b>جميع الطلاب الـ 900</b>. أما الطلاب الـ 60 الذين أجابوا فهم <b>العيّنة</b>، والدراسة نفسها مسح.'},
+{lv:2,en:'To find the favourite sport of ALL students, a teacher asks only the members of the school football team. The sample is:',ar:'لمعرفة الرياضة المفضّلة لدى جميع الطلاب، يسأل معلّم أعضاء فريق كرة القدم المدرسي فقط. العيّنة:',
+ o:[['Unbiased, because they are students','غير متحيّزة، لأنهم طلاب'],['Biased, because football players are likely to choose football','متحيّزة، لأن لاعبي كرة القدم سيختارون غالباً كرة القدم'],['Unbiased, because the team is large','غير متحيّزة، لأن الفريق كبير'],['Biased, because the teacher asked questions','متحيّزة، لأن المعلّم طرح أسئلة']],c:1,
+ en_x:'The sample <b>does not represent</b> all students: football players naturally favour football, so the result will lean towards it → <b>biased sample</b>. A random sample from the whole school would be fair.',
+ ar_x:'العيّنة <b>لا تمثّل</b> جميع الطلاب؛ فلاعبو كرة القدم يفضّلونها بطبيعة الحال، فتميل النتيجة لصالحها ← <b>عيّنة متحيّزة</b>. العيّنة العشوائية من كل طلاب المدرسة تكون عادلة.'},
+{lv:2,en:'Which survey question about the school canteen is UNBIASED?',ar:'أي سؤال مسح عن مقصف المدرسة غير متحيّز؟',
+ o:[['Don’t you agree the canteen food is unhealthy?','ألا توافق أن طعام المقصف غير صحي؟'],['How would you rate the canteen food from 1 to 5?','كيف تقيّم طعام المقصف من 1 إلى 5؟'],['Most students hate the canteen food. Do you?','معظم الطلاب يكرهون طعام المقصف، وأنت؟'],['Why is the canteen food so bad?','لماذا طعام المقصف سيئ جداً؟']],c:1,
+ en_x:'An unbiased question is <b>neutral</b>: it does not push the person towards one answer. "Rate from 1 to 5" lets everyone answer freely. The other questions already assume the food is bad.',
+ ar_x:'السؤال غير المتحيّز <b>محايد</b> لا يدفع المجيب نحو إجابة معيّنة. «قيّم من 1 إلى 5» يترك الحرية للجميع، أما بقية الأسئلة فتفترض مسبقاً أن الطعام سيئ.'},
+{lv:2,en:'A coach randomly divides 40 players into two groups: one follows a new stretching routine, the other keeps the old routine. Injuries are counted over the season. What is being measured?',ar:'يقسّم مدرّب 40 لاعباً عشوائياً إلى مجموعتين؛ إحداهما تتبع برنامج إطالة جديداً والأخرى البرنامج القديم، وتُحسب الإصابات خلال الموسم. ما الذي يتم قياسه؟',
+ o:[['The number of players','عدد اللاعبين'],['The number of injuries','عدد الإصابات'],['The stretching routine','برنامج الإطالة'],['The length of the season','طول الموسم']],c:1,
+ en_x:'The <b>treatment</b> is the new stretching routine; the <b>outcome measured</b> is the <b>number of injuries</b> in each group. This is an experiment whose purpose is to see if the new routine reduces injuries.',
+ ar_x:'<b>المعالجة</b> هي برنامج الإطالة الجديد، و<b>الناتج الذي يُقاس</b> هو <b>عدد الإصابات</b> في كل مجموعة. هذه تجربة هدفها معرفة هل يقلّل البرنامج الجديد الإصابات.'},
+{lv:2,en:'What is the main difference between an observational study and an experiment?',ar:'ما الفرق الرئيس بين الدراسة القائمة على الملاحظة والتجربة؟',
+ o:[['An experiment uses more people','التجربة تستخدم عدداً أكبر من الأشخاص'],['In an experiment researchers apply a treatment; in an observational study they do not','في التجربة يطبّق الباحث معالجة، وفي الملاحظة لا يطبّق شيئاً'],['An observational study always uses a questionnaire','دراسة الملاحظة تستخدم دائماً استبانة'],['There is no difference','لا يوجد فرق']],c:1,
+ en_x:'The key question is: <b>did the researchers do something to the participants?</b> Yes → experiment (treatment + control). No, they only watched → observational study. Size of the sample is not the difference.',
+ ar_x:'السؤال المفتاحي: <b>هل فعل الباحثون شيئاً للمشاركين؟</b> نعم ← تجربة (معالجة + مجموعة ضابطة). لا، راقبوا فقط ← دراسة ملاحظة. حجم العيّنة ليس هو الفرق.'},
+{lv:2,en:'A researcher looks at old school records to compare the attendance of students who live near the school with those who live far away. Classify the study.',ar:'يطّلع باحث على سجلات مدرسية سابقة ليقارن حضور الطلاب الذين يسكنون قرب المدرسة بمن يسكنون بعيداً. صنّف الدراسة.',
+ o:[['Survey','مسح'],['Experiment','تجربة'],['Observational study','دراسة قائمة على الملاحظة'],['Control group','مجموعة ضابطة']],c:2,
+ en_x:'The researcher only <b>reads existing data</b>; he does not assign where students live and asks no one → <b>observational study</b> (a retrospective one, based on past records).',
+ ar_x:'الباحث <b>يقرأ بيانات موجودة</b> فقط؛ فهو لا يحدّد أين يسكن الطلاب ولا يسأل أحداً ← <b>دراسة قائمة على الملاحظة</b> (استرجاعية تعتمد على سجلات سابقة).'},
+// ---------- CHALLENGE ----------
+{lv:3,en:'An observational study finds that students who eat breakfast have higher grades. A newspaper writes: "Eating breakfast causes higher grades." Is this valid?',ar:'وجدت دراسة ملاحظة أن الطلاب الذين يتناولون الفطور درجاتهم أعلى. كتبت صحيفة: «تناول الفطور يسبّب ارتفاع الدرجات». هل هذا صحيح؟',
+ o:[['Yes, the data shows it clearly','نعم، البيانات تُظهر ذلك بوضوح'],['No, an observational study shows a relationship, not cause and effect','لا، دراسة الملاحظة تُظهر علاقة وليس سبباً ونتيجة'],['Yes, because many students were studied','نعم، لأن عدد الطلاب كبير'],['No, because breakfast is not healthy','لا، لأن الفطور غير صحي']],c:1,
+ en_x:'An observational study can only show an <b>association</b>. Other factors may explain it (e.g. students who eat breakfast may sleep earlier or have more family support). Only a randomized experiment can prove <b>cause and effect</b>.',
+ ar_x:'دراسة الملاحظة تُظهر <b>ارتباطاً</b> فقط، وقد توجد عوامل أخرى تفسّره (مثلاً من يتناول الفطور قد ينام مبكراً أو يحظى بدعم أسري أكبر). وحدها التجربة العشوائية تُثبت <b>السبب والنتيجة</b>.'},
+{lv:3,en:'Which design is the BEST experiment to test whether a 10-minute quiet break before a test improves scores?',ar:'أي تصميم هو أفضل تجربة لاختبار ما إذا كانت استراحة هادئة مدتها 10 دقائق قبل الاختبار تحسّن الدرجات؟',
+ o:[['Ask students if they like quiet breaks','سؤال الطلاب هل يحبون الاستراحات الهادئة'],['Let students choose to take the break, then compare scores','ترك الطلاب يختارون أخذ الاستراحة ثم مقارنة الدرجات'],['Randomly split students into two groups; only one gets the break; compare scores','تقسيم الطلاب عشوائياً إلى مجموعتين، واحدة فقط تأخذ الاستراحة، ثم مقارنة الدرجات'],['Give all students the break and record scores','إعطاء جميع الطلاب الاستراحة وتسجيل درجاتهم']],c:2,
+ en_x:'A good experiment needs: <b>random assignment</b>, a <b>treatment group</b> (gets the break), a <b>control group</b> (no break), and the same test for both, then compare the scores. Option A is a survey, B has self-selection bias, D has no control group.',
+ ar_x:'التجربة الجيدة تحتاج: <b>توزيعاً عشوائياً</b>، و<b>مجموعة تجريبية</b> تأخذ الاستراحة، و<b>مجموعة ضابطة</b> بلا استراحة، ونفس الاختبار للمجموعتين، ثم مقارنة الدرجات. الخيار (أ) مسح، و(ب) فيه تحيّز لأن الطلاب اختاروا بأنفسهم، و(د) لا توجد فيه مجموعة ضابطة.'},
+{lv:3,en:'Why is random assignment important in an experiment?',ar:'لماذا يُعدّ التوزيع العشوائي على المجموعات مهماً في التجربة؟',
+ o:[['It makes the experiment shorter','يجعل التجربة أقصر'],['It makes the groups similar, so any difference is due to the treatment','يجعل المجموعات متشابهة، فيكون أي فرق ناتجاً عن المعالجة'],['It lets students pick their favourite group','يسمح للطلاب باختيار مجموعتهم المفضّلة'],['It removes the need for a control group','يلغي الحاجة إلى مجموعة ضابطة']],c:1,
+ en_x:'Random assignment spreads other factors (ability, motivation, health…) <b>equally</b> between groups. Then a difference in results can be linked to the <b>treatment</b>. If students choose, the motivated ones may all join one group and bias the result.',
+ ar_x:'التوزيع العشوائي يوزّع العوامل الأخرى (القدرة، الدافعية، الصحة…) <b>بالتساوي</b> بين المجموعات، فيمكن ربط أي فرق في النتائج <b>بالمعالجة</b>. لو اختار الطلاب بأنفسهم قد يتجمّع المتحمّسون في مجموعة واحدة فتتحيّز النتيجة.'},
+{lv:3,en:'A company lets 50 volunteers choose whether to drink a new energy drink; those who drink it say they feel more energetic. What are the main flaws?',ar:'تسمح شركة لـ 50 متطوعاً باختيار شرب مشروب طاقة جديد أو عدمه، فيقول من شربوه إنهم يشعرون بنشاط أكبر. ما العيوب الرئيسة؟',
+ o:[['The sample is too large','العيّنة كبيرة جداً'],['No random assignment and no proper control group (placebo); results are only self-reported','لا توزيع عشوائي ولا مجموعة ضابطة مناسبة (دواء وهمي)، والنتائج مجرد آراء ذاتية'],['The drink is new','المشروب جديد'],['The volunteers were asked questions','سُئل المتطوعون أسئلة']],c:1,
+ en_x:'Flaw 1: volunteers <b>chose</b> their group (self-selection bias). Flaw 2: <b>no control group with a placebo</b>, and "feeling energetic" is only self-reported. Improvement: randomly assign the volunteers, give the control group a drink that looks the same without the active ingredient, and measure energy objectively.',
+ ar_x:'العيب الأول: المتطوعون <b>اختاروا</b> مجموعتهم (تحيّز الاختيار الذاتي). العيب الثاني: <b>لا توجد مجموعة ضابطة بمشروب وهمي</b>، و«الشعور بالنشاط» مجرد رأي ذاتي. التحسين: توزيع المتطوعين عشوائياً، وإعطاء المجموعة الضابطة مشروباً مشابهاً بلا مادة فعّالة، وقياس النشاط بطريقة موضوعية.'},
+{lv:3,en:'Match each question with the best study type: (a) % of parents who support a longer school day; (b) does a new fertilizer increase date-palm yield?; (c) how many students wear seat belts when dropped off at school?',ar:'طابق كل سؤال مع أنسب نوع دراسة: (أ) نسبة أولياء الأمور المؤيدين لإطالة اليوم الدراسي؛ (ب) هل يزيد سماد جديد إنتاج النخيل؟؛ (ج) كم طالباً يربط حزام الأمان عند إيصاله إلى المدرسة؟',
+ o:[['(a) survey, (b) experiment, (c) observational','(أ) مسح، (ب) تجربة، (ج) ملاحظة'],['(a) experiment, (b) survey, (c) observational','(أ) تجربة، (ب) مسح، (ج) ملاحظة'],['(a) observational, (b) experiment, (c) survey','(أ) ملاحظة، (ب) تجربة، (ج) مسح'],['(a) survey, (b) observational, (c) experiment','(أ) مسح، (ب) ملاحظة، (ج) تجربة']],c:0,
+ en_x:'(a) Opinions → <b>ask</b> the parents → survey. (b) "Does X increase Y?" → treat some palms with the fertilizer and compare with untreated ones → experiment. (c) Behaviour you can see → <b>watch</b> at the school gate → observational (asking might give dishonest answers).',
+ ar_x:'(أ) رأي ← <b>نسأل</b> أولياء الأمور ← مسح. (ب) «هل يزيد X الناتج Y؟» ← نعالج بعض النخيل بالسماد ونقارنه بنخيل غير معالج ← تجربة. (ج) سلوك يمكن رؤيته ← <b>نراقب</b> عند بوابة المدرسة ← ملاحظة (لأن السؤال قد يعطي إجابات غير صادقة).'},
+{lv:3,en:'Uniforms study: researchers show new football uniforms to 100 randomly selected young adults and record their reactions. What is the purpose of the study?',ar:'دراسة الأزياء: يعرض باحثون تصاميم أزياء كرة قدم جديدة على 100 شاب اختيروا عشوائياً ويسجّلون ردود أفعالهم. ما هدف الدراسة؟',
+ o:[['To find out how much the uniforms cost','معرفة تكلفة صناعة الأزياء'],['To find out how appealing the new designs are to young adults','معرفة مدى جاذبية التصاميم الجديدة للشباب'],['To find out which team young adults support','معرفة الفريق الذي يشجّعه الشباب'],['To find out if the uniforms help players perform better','معرفة هل تساعد الأزياء اللاعبين على الأداء الأفضل']],c:1,
+ en_x:'The text says the team wants to test the designs and <b>their appeal to young adults</b>. Cost, favourite team and player performance are never mentioned or measured.',
+ ar_x:'النص يذكر أن الفريق يريد اختبار التصاميم و<b>مدى جاذبيتها للشباب</b>. أما التكلفة والفريق المفضّل وأداء اللاعبين فلم تُذكر ولم تُقَس.'},
+{lv:3,en:'Khalid says: "The uniforms study is an experiment because the researchers showed the uniforms to the young adults." Evaluate his claim.',ar:'يقول خالد: «دراسة الأزياء تجربة لأن الباحثين عرضوا الأزياء على الشباب». قيّم ادعاءه.',
+ o:[['Khalid is right: showing the uniforms is a treatment','خالد محق: عرض الأزياء معالجة'],['Khalid is wrong: it is a survey because they filled a questionnaire','خالد مخطئ: هي مسح لأنهم عبّؤوا استبانة'],['Khalid is wrong: it is an observational study; researchers only watch and record reactions, with no treatment vs control comparison','خالد مخطئ: هي دراسة ملاحظة؛ الباحثون يراقبون ويسجّلون ردود الأفعال فقط دون مقارنة معالجة بمجموعة ضابطة'],['It cannot be classified, because there is no control group','لا يمكن تصنيفها لعدم وجود مجموعة ضابطة']],c:2,
+ en_x:'<b>Claim:</b> Khalid is wrong. <b>Evidence:</b> the researchers "observe and record the reactions"; nobody fills in a questionnaire, and the participants are not split into treatment and control groups. <b>Reasoning:</b> showing something is not a treatment whose effect is compared with a control group, so this is an <b>observational study</b>.',
+ ar_x:'<b>الادعاء:</b> خالد مخطئ. <b>الدليل:</b> الباحثون «يراقبون ويسجّلون ردود الأفعال»، ولا أحد يعبّئ استبانة، ولا يُقسَّم المشاركون إلى مجموعة تجريبية وأخرى ضابطة. <b>التبرير:</b> مجرد العرض ليس معالجة يُقارَن أثرها بمجموعة ضابطة، لذلك هي <b>دراسة قائمة على الملاحظة</b>.'}
+];
+const LV={1:['SUPPORT LEVEL – Foundation','مستوى الدعم','l1'],2:['CORE LEVEL – Classify & analyse','المستوى الأساسي','l2'],3:['CHALLENGE LEVEL – Higher-order thinking','مستوى التحدّي','l3']};
+const AL=['أ','ب','ج','د'];
+let state={}, active=Q.map((_,i)=>i);
+function render(){
+  const box=document.getElementById('quiz');box.innerHTML='';let last=0;
+  active.forEach((i,k)=>{const q=Q[i];
+    if(q.lv!==last){last=q.lv;const h=document.createElement('div');h.className='level '+LV[q.lv][2];h.innerHTML=LV[q.lv][0]+' · <span style="font-family:Noto Kufi Arabic">'+LV[q.lv][1]+'</span>';box.appendChild(h);}
+    const d=document.createElement('div');d.className='q';d.id='q'+i;
+    d.innerHTML=`<div class="qh"><div class="num">${k+1}</div><div style="flex:1"><div class="qt">${q.en}</div><div class="qa ar">${q.ar}</div>
+      <div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}"><span class="l">${'ABCD'[j]}</span><span>${o[0]}<small>(${AL[j]}) ${o[1]}</small></span></button>`).join('')}</div>
+      <div class="fb"></div></div></div>`;
+    d.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(i,+b.dataset.j));
+    box.appendChild(d);});
+  stats();
+}
+function answer(i,j){
+  if(state[i]!==undefined)return;const q=Q[i],ok=j===q.c;state[i]=ok;
+  const d=document.getElementById('q'+i);d.classList.add(ok?'right':'wrong');
+  d.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===q.c)b.classList.add('correct');else if(k===j)b.classList.add('picked-wrong');});
+  const fb=d.querySelector('.fb');fb.className='fb show '+(ok?'good':'bad');
+  fb.innerHTML=`<div class="head">${ok?'✅ Correct!':'❌ Not quite'} — the correct answer is <b>${'ABCD'[q.c]}</b></div><div class="head ar">${ok?'إجابة صحيحة':'إجابة خاطئة'} — الإجابة الصحيحة هي (${AL[q.c]})</div>
+    <div class="en">${q.en_x}</div><div class="ar">${q.ar_x}</div>`;
+  stats();
+}
+function stats(){
+  const done=active.filter(i=>state[i]!==undefined),ok=done.filter(i=>state[i]).length;
+  document.getElementById('sOk').textContent=ok;document.getElementById('sNo').textContent=done.length-ok;
+  document.getElementById('sLeft').textContent=active.length-done.length;
+  document.getElementById('prog').style.width=(100*done.length/active.length)+'%';
+  const r=document.getElementById('result');
+  if(done.length===active.length){const p=Math.round(100*ok/active.length);
+    document.getElementById('score').textContent=ok+' / '+active.length+'  ('+p+'%)';
+    const n=document.getElementById('name').value.trim();
+    document.getElementById('msg').textContent=(n?n+', ':'')+(p>=85?'Excellent work! You have mastered types of studies.':p>=60?'Good job! Review the explanations of the questions you missed.':'Keep going! Read the explanations, then retry the wrong answers.');
+    document.getElementById('msgAr').textContent=p>=85?'ممتاز! أتقنت أنواع الدراسات.':p>=60?'عمل جيد! راجع شرح الأسئلة التي أخطأت فيها.':'استمر! اقرأ الشرح ثم أعد الأسئلة الخاطئة.';
+    r.classList.add('show');setTimeout(()=>r.scrollIntoView({behavior:'smooth'}),300);
+  } else r.classList.remove('show');
+}
+function retryWrong(){const w=active.filter(i=>state[i]===false);if(!w.length){restart();return;}w.forEach(i=>delete state[i]);active=w;render();scrollTo({top:0,behavior:'smooth'});}
+function restart(){state={};active=Q.map((_,i)=>i);render();scrollTo({top:0,behavior:'smooth'});}
+render();
+</script>
+</body>
+</html>
